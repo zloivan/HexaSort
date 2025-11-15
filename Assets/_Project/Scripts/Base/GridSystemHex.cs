@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace _Project.Scripts.Base
 {
     public class GridSystemHex<TGridObject>
     {
+        const float HEX_SLOT_HEIGHT_OFFSET_MULTIPLIER = 0.75f;
         private readonly int _width;
         private readonly int _height;
         private readonly float _slotSize;
@@ -17,8 +19,8 @@ namespace _Project.Scripts.Base
             _slotSize = slotSize;
             _width = width;
             _height = height;
-            
-            
+
+
             for (var x = 0; x < _width; x++)
             {
                 for (var z = 0; z < _height; z++)
@@ -35,24 +37,68 @@ namespace _Project.Scripts.Base
         public int GetWidth() =>
             _width;
 
-        public GridPosition GetGridPosition(Vector3 worldPosition) =>
-            new(Mathf.RoundToInt(worldPosition.x / _slotSize),
-                Mathf.RoundToInt(worldPosition.z / _slotSize));
-
-        public Vector3 GetWorldPosition(GridPosition gridPosition)
+        public GridPosition GetGridPosition(Vector3 worldPosition)
         {
-            const float HEX_SLOT_HEIGHT_OFFSET_MULTIPLIER = 0.75f;
-            return new Vector3(gridPosition.X, 0, 0) * _slotSize +
-                   new Vector3(0, 0, gridPosition.Z) * _slotSize * HEX_SLOT_HEIGHT_OFFSET_MULTIPLIER
-                   + (gridPosition.Z % 2 == 1 ? new Vector3(1, 0, 0) * _slotSize * 0.5f : Vector3.zero);
+            var approxGridPos = new GridPosition(Mathf.RoundToInt(worldPosition.x / _slotSize),
+                Mathf.RoundToInt(worldPosition.z / _slotSize / HEX_SLOT_HEIGHT_OFFSET_MULTIPLIER));
+
+            var neighbors = GetNeighbors(approxGridPos);
+
+            var minDistance = float.MaxValue;
+            var newGridPosition = approxGridPos;
+            
+            if (IsValidGridPosition(approxGridPos))
+            {
+                var approxWorldPos = GetWorldPosition(approxGridPos);
+                minDistance = Vector3.Distance(worldPosition, approxWorldPos);
+            }
+            
+            foreach (var neighborGridPosition in neighbors)
+            {
+                if (!IsValidGridPosition(neighborGridPosition))
+                {
+                    continue;
+                }
+                
+                var neighborWorldPos = GetWorldPosition(neighborGridPosition);
+                var distance = Vector3.Distance(worldPosition, neighborWorldPos);
+
+                if (minDistance <= distance) 
+                    continue;
+                
+                newGridPosition = neighborGridPosition;
+                minDistance = distance;
+            }
+
+            return newGridPosition;
         }
+
+        public Vector3 GetWorldPosition(GridPosition gridPosition) =>
+            new Vector3(gridPosition.X, 0, 0) * _slotSize +
+            _slotSize * HEX_SLOT_HEIGHT_OFFSET_MULTIPLIER * new Vector3(0, 0, gridPosition.Z)
+            + (gridPosition.Z % 2 == 1 ? _slotSize * 0.5f * new Vector3(1, 0, 0) : Vector3.zero);
 
         public TGridObject GetGridObject(GridPosition gridPos) =>
             _gridObjectArray[gridPos.X, gridPos.Z];
-        
+
         public bool IsValidGridPosition(GridPosition gridPosition) =>
             gridPosition is { X: >= 0, Z: >= 0 } &&
             gridPosition.X < _width && gridPosition.Z < _height;
+
+        public List<GridPosition> GetNeighbors(GridPosition pos)
+        {
+            var isAddRow = pos.Z % 2 == 1;
+
+            return new List<GridPosition>
+            {
+                pos + new GridPosition(-1, 0), //left
+                pos + new GridPosition(+1, 0), //right
+                pos + new GridPosition(-1, +1), //top-left
+                pos + new GridPosition(-1, -1), //bot-left
+                pos + new GridPosition(isAddRow ? 0 : +1, +1), //top-right
+                pos + new GridPosition(isAddRow ? 0 : +1, -1), //bot-right
+            };
+        }
 
         public void CreateDebugObjects(Transform prefab, Transform parent)
         {
@@ -72,5 +118,3 @@ namespace _Project.Scripts.Base
         }
     }
 }
-
-    

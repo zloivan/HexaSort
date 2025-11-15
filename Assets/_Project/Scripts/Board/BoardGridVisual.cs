@@ -52,6 +52,7 @@ namespace _Project.Scripts.Board
             {
                 _boarGridVisuals[_selectedGridPosition.X, _selectedGridPosition.Z].RemoveHighlight();
             }
+            
             _selectedGridPosition = newSelected;
             _boarGridVisuals[_selectedGridPosition.X, _selectedGridPosition.Z].Highlight();
         }

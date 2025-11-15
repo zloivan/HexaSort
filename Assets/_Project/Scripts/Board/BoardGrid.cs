@@ -7,20 +7,30 @@ namespace _Project.Scripts.Board
 {
     public class BoardGrid : MonoBehaviour
     {
+        public static BoardGrid Instance { get; private set; }
+        
         private const float SLOT_SIZE = 2f;
         [SerializeField] private int _width;
         [SerializeField] private int _height;
+
+        [SerializeField] private GameObject _gridDebug;
+        
 
         private GridSystemHex<GridObject> _gridSystemHex;
 
         private void Awake()
         {
+            Instance = this;
             _gridSystemHex =
                 new GridSystemHex<GridObject>(
                     _width,
                     _height,
                     SLOT_SIZE,
                     (grid, pos) => new GridObject(grid, pos));
+
+            
+            //TODO: DEBUG LOGIC
+            _gridSystemHex.CreateDebugObjects(_gridDebug.transform, transform);
         }
 
         public int GetWidth() =>
@@ -51,5 +61,8 @@ namespace _Project.Scripts.Board
 
             return result;
         }
+
+        public List<GridPosition> GetNeighbors(GridPosition getGridPosition) =>
+            _gridSystemHex.GetNeighbors(getGridPosition);
     }
 }

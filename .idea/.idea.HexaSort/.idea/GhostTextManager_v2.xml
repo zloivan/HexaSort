@@ -3,6 +3,18 @@
   <component name="GhostTextManager">
     <option name="inputs">
       <map>
+        <entry key="Can you find a bug here?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1763206430001" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
         <entry key="How could we make this universal, without just mouse but with touch if this is touch screen?">
           <value>
             <GhostTextMetaData>
@@ -10,6 +22,18 @@
               <option name="timestamps">
                 <list>
                   <option value="1763121064307" />
+                </list>
+              </option>
+            </GhostTextMetaData>
+          </value>
+        </entry>
+        <entry key="Ok nice, its better but not perfect. Could you provide any info why do I still have problem identifying there correct position?">
+          <value>
+            <GhostTextMetaData>
+              <option name="count" value="1.0" />
+              <option name="timestamps">
+                <list>
+                  <option value="1763206613399" />
                 </list>
               </option>
             </GhostTextMetaData>

@@ -48,6 +48,6 @@ namespace _Project.Scripts.Base
             new(a.X / b.X, a.Z / b.Z);
 
         public override string ToString() =>
-            $"X: {X}, Z: {Z};";
+            $"({X}, {Z})";
     }
 }
