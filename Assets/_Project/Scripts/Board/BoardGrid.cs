@@ -43,7 +43,7 @@ namespace _Project.Scripts.Board
             var result = new List<GridPosition>();
             for (var x = 0; x < _gridSystemHex.GetWidth(); x++)
             {
-                for (var z = 0; z < _gridSystemHex.GetWidth(); z++)
+                for (var z = 0; z < _gridSystemHex.GetHeight(); z++)
                 {
                     result.Add(new GridPosition(x, z));
                 }

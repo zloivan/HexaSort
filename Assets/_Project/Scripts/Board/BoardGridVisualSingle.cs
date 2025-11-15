@@ -5,7 +5,7 @@ namespace _Project.Scripts.Board
     public class BoardGridVisualSingle : MonoBehaviour
     {
         private const string EMISSION = "_EMISSION";
-        private static readonly int ColorPropertyId = Shader.PropertyToID(EMISSION);
+        private static readonly int ColorPropertyId = Shader.PropertyToID("_EmissionColor");
 
         [SerializeField] private float _emissionIntensity = 2f;
 

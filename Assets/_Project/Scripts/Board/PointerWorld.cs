@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace _Project.Scripts.Board
@@ -8,7 +9,8 @@ namespace _Project.Scripts.Board
 
         [SerializeField] private LayerMask _availableLayers;
         [SerializeField] private Camera _camera;
-
+        [SerializeField] private Transform _debugView;
+        
 
         private void Awake()
         {
@@ -23,8 +25,18 @@ namespace _Project.Scripts.Board
                 ? Vector3.zero
                 : hit.point;
         }
-        
-        
+
+        private void Update()
+        {
+            if (_debugView == null)
+            {
+                return;
+            }
+
+            _debugView.transform.position = GetPointerPositionInWorld();
+        }
+
+
         private static Vector3 GetScreenPosition()
         {
             if (Input.touchCount > 0)
