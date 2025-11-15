@@ -65,4 +65,5 @@ namespace _Project.Scripts.Board
         public List<GridPosition> GetNeighbors(GridPosition getGridPosition) =>
             _gridSystemHex.GetNeighbors(getGridPosition);
     }
+    
 }
