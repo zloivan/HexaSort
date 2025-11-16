@@ -30,7 +30,7 @@ namespace _Project.Scripts.Board
 
             
             //TODO: DEBUG LOGIC
-            _gridSystemHex.CreateDebugObjects(_gridDebug.transform, transform);
+           // _gridSystemHex.CreateDebugObjects(_gridDebug.transform, transform);
         }
 
         public int GetWidth() =>
@@ -64,6 +64,21 @@ namespace _Project.Scripts.Board
 
         public List<GridPosition> GetNeighbors(GridPosition getGridPosition) =>
             _gridSystemHex.GetNeighbors(getGridPosition);
+
+        public bool IsSlotEmpty(GridPosition gridPos) =>
+            _gridSystemHex.GetGridObject(gridPos).GetStack() == null;
+
+        public void PlaceStackAtPosition(GridPosition gridPos, TileStack tileStack)
+        {
+            var gridObject = _gridSystemHex.GetGridObject(gridPos);
+
+            if (gridObject.GetStack() != null)
+            {
+                return;
+            }
+            
+            gridObject.SetStack(tileStack);
+        }
     }
     
 }

@@ -8,13 +8,23 @@ namespace _Project.Scripts.Board
     {
         private readonly GridPosition _gridPosition;
         private readonly GridSystemHex<GridObject> _gridSystemHex;
-        private readonly TileStack _stack;
+        private TileStack _stack;
         
         public GridObject(GridSystemHex<GridObject> gridSystemHex, GridPosition gridPosition)
         {
             _gridPosition = gridPosition;
             _gridSystemHex = gridSystemHex;
-            _stack = new TileStack();
+        }
+
+        public void SetStack(TileStack stack) =>
+            _stack = stack;
+
+        public TileStack GetStack() =>
+            _stack;
+
+        public void ClearStack()
+        {
+            _stack = null;
         }
 
         public override string ToString() =>

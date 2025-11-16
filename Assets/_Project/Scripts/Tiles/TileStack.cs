@@ -5,26 +5,6 @@ using UnityEngine;
 
 namespace _Project.Scripts.Board
 {
-    public enum TileColor
-    {
-        Red,
-        Green,
-        Blue,
-        Yellow,
-        Purple
-    }
-
-    public readonly struct ColoredTile
-    {
-        private readonly TileColor _color;
-
-        public ColoredTile(TileColor color) =>
-            _color = color;
-
-        public TileColor GetColor() =>
-            _color;
-    }
-
     public class TileStack : MonoBehaviour
     {
         private readonly List<ColoredTile> _tiles = new();

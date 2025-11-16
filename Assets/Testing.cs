@@ -10,7 +10,7 @@ public class Testing : MonoBehaviour
         {
             var neighbors =
                 BoardGrid.Instance.GetNeighbors(
-                    BoardGrid.Instance.GetGridPosition(PointerWorld.GetPointerPositionInWorld()));
+                    BoardGrid.Instance.GetGridPosition(PointerToWorld.GetPointerPositionInWorld()));
             Debug.Log($"Neighbors of click {string.Join("", neighbors)}");
         }
     }

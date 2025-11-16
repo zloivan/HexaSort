@@ -40,7 +40,7 @@ namespace _Project.Scripts.Board
 
         private void Update()
         {
-            var worldPointerPosition = PointerWorld.GetPointerPositionInWorld();
+            var worldPointerPosition = PointerToWorld.GetPointerPositionInWorld();
             var newSelected = _boardGrid.GetGridPosition(worldPointerPosition);
 
             var isValid = _boardGrid.IsValidGridPosition(newSelected);

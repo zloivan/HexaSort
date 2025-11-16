@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace _Project.Scripts.Board
 {
-    public class PointerWorld : MonoBehaviour
+    public class PointerToWorld : MonoBehaviour
     {
-        private static PointerWorld Instance { get; set; }
+        private static PointerToWorld Instance { get; set; }
 
         [SerializeField] private LayerMask _availableLayers;
         [SerializeField] private Camera _camera;
@@ -24,6 +24,14 @@ namespace _Project.Scripts.Board
             return !Physics.Raycast(ray, out var hit, Mathf.Infinity, Instance._availableLayers)
                 ? Vector3.zero
                 : hit.point;
+        }
+
+        public static RaycastHit GetPointerHitInWorld()
+        {
+            var ray = Instance._camera.ScreenPointToRay(GetScreenPosition());
+            return !Physics.Raycast(ray, out var hit, Mathf.Infinity, Instance._availableLayers)
+                ? default
+                : hit;
         }
 
         private void Update()
