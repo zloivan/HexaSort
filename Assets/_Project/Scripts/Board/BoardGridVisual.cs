@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using _Project.Scripts.Base;
+using HexSort.Grid;
+using HexSort.Utilitis;
 using UnityEngine;
 
-namespace _Project.Scripts.Board
+namespace HexSort.Board
 {
     public class BoardGridVisual : MonoBehaviour
     {

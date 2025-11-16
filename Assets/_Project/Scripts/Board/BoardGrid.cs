@@ -1,9 +1,9 @@
-using System;
 using System.Collections.Generic;
-using _Project.Scripts.Base;
+using HexSort.Grid;
+using HexSort.Tiles;
 using UnityEngine;
 
-namespace _Project.Scripts.Board
+namespace HexSort.Board
 {
     public class BoardGrid : MonoBehaviour
     {
@@ -78,6 +78,21 @@ namespace _Project.Scripts.Board
             }
             
             gridObject.SetStack(tileStack);
+        }
+
+        public TileStack GetStackAt(GridPosition gridPosition) =>
+            _gridSystemHex.GetGridObject(gridPosition).GetStack();
+
+        public void RemoveStackAtPosition(GridPosition position)
+        {
+            var gridObj = _gridSystemHex.GetGridObject(position);
+            var stack = gridObj.GetStack();
+
+            if (stack == null) 
+                return;
+            
+            Destroy(stack.gameObject);
+            gridObj.ClearStack();
         }
     }
     

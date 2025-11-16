@@ -1,10 +1,8 @@
-using System.Collections.Generic;
-using _Project.Scripts.Base;
-using UnityEngine;
+using HexSort.Tiles;
 
-namespace _Project.Scripts.Board
+namespace HexSort.Grid
 {
-    public class  GridObject
+    public class GridObject
     {
         private readonly GridPosition _gridPosition;
         private readonly GridSystemHex<GridObject> _gridSystemHex;

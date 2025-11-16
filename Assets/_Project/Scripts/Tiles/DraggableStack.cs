@@ -1,7 +1,10 @@
-using _Project.Scripts.Base;
+using HexSort.Board;
+using HexSort.Grid;
+using HexSort.MergeSystem;
+using HexSort.Utilitis;
 using UnityEngine;
 
-namespace _Project.Scripts.Board
+namespace HexSort.Tiles
 {
     public class DraggableStack : MonoBehaviour //TODO: Move to some input manager and probably use PointerToWorld
     {
@@ -92,6 +95,7 @@ namespace _Project.Scripts.Board
 
             _boardGrid.PlaceStackAtPosition(gridPos, _tileStack);
 
+            MergeController.Instance.TriggerMerge(gridPos);
             enabled = false;
         }
     }

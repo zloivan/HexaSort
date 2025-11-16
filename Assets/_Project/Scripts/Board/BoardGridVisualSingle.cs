@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.Scripts.Board
+namespace HexSort.Board
 {
     public class BoardGridVisualSingle : MonoBehaviour
     {

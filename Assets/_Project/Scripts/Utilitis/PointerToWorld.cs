@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace _Project.Scripts.Board
+namespace HexSort.Utilitis
 {
     public class PointerToWorld : MonoBehaviour
     {

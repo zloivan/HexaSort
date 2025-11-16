@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace _Project.Scripts.Board
+namespace HexSort.Tiles
 {
     public class TileStack : MonoBehaviour
     {
@@ -55,7 +55,7 @@ namespace _Project.Scripts.Board
             var topColor = _tiles[^1].GetColor();
             var count = 0;
 
-            for (var i = _tiles.Count; i >= 0; i--)
+            for (var i = _tiles.Count - 1; i >= 0; i--)
             {
                 if (_tiles[i].GetColor() == topColor)
                     count++;
@@ -86,6 +86,17 @@ namespace _Project.Scripts.Board
         }
 
         public List<ColoredTile> GetAllTiles() => new(_tiles);
+
+        public List<ColoredTile> GetTopBlock()
+        {
+            var count = GetTopColorBlockCount();
+    
+            if (count == 0)
+                return new List<ColoredTile>();
+    
+            var startIndex = _tiles.Count - count;
+            return _tiles.GetRange(startIndex, count);
+        }
 
         public bool GetIsDirty() =>
             _isDirty;

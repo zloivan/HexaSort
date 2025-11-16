@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace _Project.Scripts.Board
+namespace HexSort.Tiles
 {
     public class HandProvider : MonoBehaviour
     {

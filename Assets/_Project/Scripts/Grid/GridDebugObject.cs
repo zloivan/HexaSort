@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace _Project.Scripts.Base
+namespace HexSort.Grid
 {
     public class GridDebugObject : MonoBehaviour
     {

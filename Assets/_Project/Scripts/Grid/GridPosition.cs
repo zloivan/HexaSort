@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace _Project.Scripts.Base
+namespace HexSort.Grid
 {
     public readonly struct GridPosition : IEquatable<GridPosition>
     {

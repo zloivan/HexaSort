@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace _Project.Scripts.Board
+namespace HexSort.Tiles
 {
     public class TilesVisualSpawner : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Project.Scripts.Base
+namespace HexSort.Grid
 {
     public class GridSystemHex<TGridObject>
     {

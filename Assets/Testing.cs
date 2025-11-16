@@ -1,17 +1,21 @@
-using _Project.Scripts.Board;
+using HexSort.Board;
+using HexSort.Utilitis;
 using UnityEngine;
 
-public class Testing : MonoBehaviour
+namespace HexSort
 {
-    // Update is called once per frame
-    void Update()
+    public class Testing : MonoBehaviour
     {
-        if (Input.GetMouseButtonDown(0))
+        // Update is called once per frame
+        void Update()
         {
-            var neighbors =
-                BoardGrid.Instance.GetNeighbors(
-                    BoardGrid.Instance.GetGridPosition(PointerToWorld.GetPointerPositionInWorld()));
-            Debug.Log($"Neighbors of click {string.Join("", neighbors)}");
+            if (Input.GetMouseButtonDown(0))
+            {
+                var neighbors =
+                    BoardGrid.Instance.GetNeighbors(
+                        BoardGrid.Instance.GetGridPosition(PointerToWorld.GetPointerPositionInWorld()));
+                Debug.Log($"Neighbors of click {string.Join("", neighbors)}");
+            }
         }
     }
 }

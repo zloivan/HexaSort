@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Project.Scripts.Board
+namespace HexSort.Tiles
 {
     public class TileStackVisual : MonoBehaviour
     {
