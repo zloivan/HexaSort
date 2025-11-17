@@ -19,6 +19,11 @@ namespace HexSort.MergeSystem
             }
             
             fromStack.MoveTo(toStack, operation.TileCount);
+            
+            if (fromStack.GetAllTiles().Count == 0)
+            {
+                grid.RemoveStackAtPosition(operation.From);
+            }
         }
 
         public static bool CheckAndDestroyStack(GridPosition position, BoardGrid grid)
