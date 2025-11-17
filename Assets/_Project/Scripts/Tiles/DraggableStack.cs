@@ -17,6 +17,7 @@ namespace HexSort.Tiles
         private bool _isDragging;
         private Vector3 _originalPosition;
         private BoardGrid _boardGrid;
+        private MergeController _mergeController;
 
         private void Awake()
         {
@@ -27,6 +28,7 @@ namespace HexSort.Tiles
         private void Start()
         {
             _boardGrid = BoardGrid.Instance;
+            _mergeController = MergeController.Instance;
         }
 
         private void Update()
@@ -95,7 +97,7 @@ namespace HexSort.Tiles
 
             _boardGrid.PlaceStackAtPosition(gridPos, _tileStack);
 
-            MergeController.Instance.TriggerMerge(gridPos);
+            _mergeController.TriggerMerge(gridPos);
             enabled = false;
         }
     }

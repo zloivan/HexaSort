@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using HexSort.Board;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,25 +19,28 @@ namespace HexSort.Tiles
         [SerializeField] private List<Transform> _spawnPositions;
         [SerializeField] private GameObject _stackPrefab;
         [SerializeField] private TilesVisualSpawner _tileVisualSpawner;
-
-        private readonly List<GameObject> _currentStack = new();
+        
+        private BoardGrid _boardGrid;
+        private int _placedCount;
 
         private void Start()
         {
             GenerateNewStacks();
+            _boardGrid = BoardGrid.Instance;
+            
+            _boardGrid.OnNewStackPlaced += BoardGrid_OnNewStackPlaced;
         }
 
         private void GenerateNewStacks()
         {
-            ClearCurrentStack();
-
+            _placedCount = 0;
+            
             for (var i = 0; i < _spawnPositions.Count; i++)
             {
                 var stackGo = Instantiate(_stackPrefab, _spawnPositions[i].position, Quaternion.identity);
                 var stackVisual = stackGo.GetComponent<TileStack>();
 
                 GenerateRandomStack(stackVisual);
-                _currentStack.Add(stackGo);
             }
         }
 
@@ -65,14 +70,11 @@ namespace HexSort.Tiles
             stackVisual.AddTiles(newTiles);
         }
 
-        private void ClearCurrentStack()
+        //EVENT HANDLERS ----------
+        private void BoardGrid_OnNewStackPlaced(object sender, EventArgs e)
         {
-            foreach (var stackGo in _currentStack)
-            {
-                Destroy(stackGo);
-            }
-
-            _currentStack.Clear();
+            if (++_placedCount >= HAND_SIZE) 
+                GenerateNewStacks();
         }
     }
 }

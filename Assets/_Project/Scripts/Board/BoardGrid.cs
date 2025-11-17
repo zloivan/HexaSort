@@ -1,20 +1,24 @@
+using System;
 using System.Collections.Generic;
 using HexSort.Grid;
 using HexSort.Tiles;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace HexSort.Board
 {
     public class BoardGrid : MonoBehaviour
     {
+        public event EventHandler OnNewStackPlaced;
+        public event EventHandler OnStackremoved;
         public static BoardGrid Instance { get; private set; }
-        
+
         private const float SLOT_SIZE = 2f;
         [SerializeField] private int _width;
         [SerializeField] private int _height;
 
         [SerializeField] private GameObject _gridDebug;
-        
+
 
         private GridSystemHex<GridObject> _gridSystemHex;
 
@@ -28,7 +32,7 @@ namespace HexSort.Board
                     SLOT_SIZE,
                     (grid, pos) => new GridObject(grid, pos));
 
-            
+
             //TODO: DEBUG LOGIC
             _gridSystemHex.CreateDebugObjects(_gridDebug.transform, transform);
         }
@@ -76,8 +80,9 @@ namespace HexSort.Board
             {
                 return;
             }
-            
+
             gridObject.SetStack(tileStack);
+            OnNewStackPlaced?.Invoke(this, EventArgs.Empty);
         }
 
         public TileStack GetStackAt(GridPosition gridPosition) =>
@@ -88,12 +93,12 @@ namespace HexSort.Board
             var gridObj = _gridSystemHex.GetGridObject(position);
             var stack = gridObj.GetStack();
 
-            if (stack == null) 
+            if (stack == null)
                 return;
-            
+
             Destroy(stack.gameObject);
             gridObj.ClearStack();
+            OnStackremoved?.Invoke(this, EventArgs.Empty);
         }
     }
-    
 }
