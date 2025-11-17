@@ -5,12 +5,12 @@ using HexSort.Tiles;
 
 namespace HexSort.MergeSystem.Rules
 {
-    public class InboundRule : IMergeRule
+    public class OutboundRule : IMergeRule
     {
-        private const float SCORE_BASE = 50f;
-        private const float SCORE_PER_TILE = 2f;
-        private const float SCORE_WILL_DESTROY = 150f;
-        private const float SCORE_WILL_MAKE_MONO = 75f;
+        private const float SCORE_BASE = 10f;
+        private const float SCORE_PER_TILE = 1f;
+        private const float SCORE_WILL_DESTROY = 100f;
+        private const float SCORE_WILL_MAKE_MONO = 50f;
 
         public List<MergeOperation> Analyze(GridPosition sourcePos, BoardGrid grid)
         {
@@ -24,7 +24,6 @@ namespace HexSort.MergeSystem.Rules
 
             var sourceTopColor = sourceStack.GetTopColor();
             var neighborPositions = grid.GetNeighbors(sourcePos);
-
 
             foreach (var neighborPos in neighborPositions)
             {
@@ -44,38 +43,38 @@ namespace HexSort.MergeSystem.Rules
                     continue;
                 }
 
-                var blockCount = neighborStack.GetTopColorBlockCount();
+                var blockCount = sourceStack.GetTopColorBlockCount();
                 if (blockCount <= 0)
                 {
                     continue;
                 }
 
-                var score = CalculateScore(sourceStack, neighborStack, blockCount);
+                var score = CalculateScore(neighborStack, sourceStack, blockCount);
 
                 operations.Add(new MergeOperation(
-                    neighborPos,
                     sourcePos,
+                    neighborPos,
                     blockCount,
                     score,
-                    $"Inbound: {blockCount} tiles from {neighborPos} to {sourcePos}"));
+                    $"Outbound: {blockCount} tiles from {sourcePos} to {neighborPos}"));
             }
 
             return operations;
         }
 
-        private float CalculateScore(TileStack sourceStack, TileStack neighborStack, int blockCount)
+        private float CalculateScore(TileStack targetStack, TileStack sourceStack, int blockCount)
         {
             var score = SCORE_BASE + blockCount * SCORE_PER_TILE;
 
-            var sourceTiles = sourceStack.GetAllTiles();
-            var neighborTopBlock = neighborStack.GetTopBlock();
+            var targetTiles = targetStack.GetAllTiles();
+            var sourceTopBlock = sourceStack.GetTopBlock();
 
-            var resultCount = sourceTiles.Count + blockCount;
+            var resultCount = targetTiles.Count + blockCount;
             var willBeMonoColor = true;
 
-            var firstColor = sourceTiles[0].GetColor();
+            var firstColor = targetTiles[0].GetColor();
 
-            foreach (var tile in sourceTiles)
+            foreach (var tile in targetTiles)
             {
                 if (tile.GetColor() != firstColor)
                 {
@@ -86,7 +85,7 @@ namespace HexSort.MergeSystem.Rules
 
             if (willBeMonoColor)
             {
-                foreach (var tile in neighborTopBlock)
+                foreach (var tile in sourceTopBlock)
                 {
                     if (tile.GetColor() != firstColor)
                     {

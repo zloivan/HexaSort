@@ -9,7 +9,9 @@ namespace HexSort.MergeSystem
     {
         private static readonly List<IMergeRule> _rules = new()
         {
-            new InboundRule()
+            new ConsolidationRule(),
+            new InboundRule(),
+            new OutboundRule(),
         };
 
         public static MergeOperation? FindBestMerge(GridPosition sourcePosition, BoardGrid grid)

@@ -7,7 +7,7 @@ namespace HexSort.Tiles
 {
     public class TileStack : MonoBehaviour
     {
-        private readonly List<ColoredTile> _tiles = new();
+        [SerializeField] private List<ColoredTile> _tiles = new();
        
         private bool _isDirty;
 

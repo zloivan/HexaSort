@@ -1,4 +1,5 @@
-using UnityEngine;
+using System;
+using Random = UnityEngine.Random;
 
 namespace HexSort.Tiles
 {
@@ -11,9 +12,10 @@ namespace HexSort.Tiles
         Purple
     }
 
-    public readonly struct ColoredTile
+    [Serializable]
+    public struct ColoredTile
     {
-        private readonly TileColor _color;
+        private TileColor _color;
 
         public ColoredTile(TileColor color) =>
             _color = color;
