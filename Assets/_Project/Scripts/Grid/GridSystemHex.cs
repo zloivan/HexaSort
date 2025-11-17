@@ -46,26 +46,26 @@ namespace HexSort.Grid
 
             var minDistance = float.MaxValue;
             var newGridPosition = approxGridPos;
-            
+
             if (IsValidGridPosition(approxGridPos))
             {
                 var approxWorldPos = GetWorldPosition(approxGridPos);
                 minDistance = Vector3.Distance(worldPosition, approxWorldPos);
             }
-            
+
             foreach (var neighborGridPosition in neighbors)
             {
                 if (!IsValidGridPosition(neighborGridPosition))
                 {
                     continue;
                 }
-                
+
                 var neighborWorldPos = GetWorldPosition(neighborGridPosition);
                 var distance = Vector3.Distance(worldPosition, neighborWorldPos);
 
-                if (minDistance <= distance) 
+                if (minDistance <= distance)
                     continue;
-                
+
                 newGridPosition = neighborGridPosition;
                 minDistance = distance;
             }
@@ -93,10 +93,10 @@ namespace HexSort.Grid
             {
                 pos + new GridPosition(-1, 0), //left
                 pos + new GridPosition(+1, 0), //right
-                pos + new GridPosition(-1, +1), //top-left
-                pos + new GridPosition(-1, -1), //bot-left
-                pos + new GridPosition(isAddRow ? 0 : +1, +1), //top-right
-                pos + new GridPosition(isAddRow ? 0 : +1, -1), //bot-right
+                pos + new GridPosition(0, +1), //top-left
+                pos + new GridPosition(0, -1), //bot-left
+                pos + new GridPosition(isAddRow ? +1 : -1, +1), //top-right
+                pos + new GridPosition(isAddRow ? +1 : -1, -1), //bot-right
             };
         }
 
