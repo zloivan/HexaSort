@@ -95,23 +95,37 @@ namespace HexSort.MergeSystem
 
                 currentDirty.Clear();
 
-                foreach (var position in affectedPositions)
+                if (_boardGrid.GetStackAt(operation.Value.To) != null)
                 {
-                    if (_boardGrid.GetStackAt(position) != null)
-                    {
-                        currentDirty.Add(position);
-                        var neighbors = _boardGrid.GetNeighbors(position);
-                        foreach (var neighbor in neighbors)
-                        {
-                            if (!_boardGrid.IsValidGridPosition(neighbor) || _boardGrid.GetStackAt(neighbor) == null)
-                                continue;
+                    currentDirty.Add(operation.Value.To);
 
-                            if (!currentDirty.Contains(neighbor))
-                            {
-                                currentDirty.Add(neighbor);
-                            }
+                    var toStack = _boardGrid.GetStackAt(operation.Value.To);
+                    var toTopColor = toStack.GetTopColor();
+                    var neighbors = _boardGrid.GetNeighbors(operation.Value.To);
+
+
+                    foreach (var neighbor in neighbors)
+                    {
+                        if (!_boardGrid.IsValidGridPosition(neighbor))
+                            continue;
+
+                        var neighborStack = _boardGrid.GetStackAt(neighbor);
+                        if (neighborStack == null)
+                        {
+                            continue;
+                        }
+
+                        if (neighborStack.GetTopColor() == toTopColor && !currentDirty.Contains(neighbor))
+                        {
+                            currentDirty.Add(neighbor);
                         }
                     }
+                }
+
+
+                if (_boardGrid.GetStackAt(operation.Value.From) != null && !currentDirty.Contains(operation.Value.From))
+                {
+                    currentDirty.Add(operation.Value.From);
                 }
             }
         }

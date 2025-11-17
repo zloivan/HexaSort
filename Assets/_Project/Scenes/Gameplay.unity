@@ -1026,7 +1026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 334dd2460f7a4bdd8f6afa3ac85c34f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cascadeDelyaSeconds: 0.3
+  _cascadeDelyaSeconds: 3
 --- !u!4 &1490786308
 Transform:
   m_ObjectHideFlags: 0
