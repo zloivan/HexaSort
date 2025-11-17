@@ -39,7 +39,7 @@ namespace HexSort.Tiles
         {
             foreach (var tile in _tilesVisualList)
             {
-                Destroy(tile.gameObject);
+                _tileSpawner.DespawnTileVisual(tile);
             }
 
             _tilesVisualList.Clear();

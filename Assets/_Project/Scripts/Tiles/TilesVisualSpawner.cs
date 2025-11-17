@@ -17,6 +17,7 @@ namespace HexSort.Tiles
         [SerializeField] private List<ColorMaterialPair> _colorToMaterialList;
         [SerializeField] private TileVisual _prefab;
 
+        //TODO: Use pool here
         public TileVisual SpawnTileVisual(ColoredTile tile)
         {
             var tileVisual = Instantiate(_prefab);
@@ -26,6 +27,7 @@ namespace HexSort.Tiles
             return tileVisual;
         }
 
+        //TODO: Use pool here
         public void DespawnTileVisual(TileVisual tileVisual)
         {
             if (tileVisual != null)
