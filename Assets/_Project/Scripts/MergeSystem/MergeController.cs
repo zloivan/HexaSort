@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using HexSort.Board;
@@ -11,7 +10,6 @@ namespace HexSort.MergeSystem
     {
         public static MergeController Instance { get; private set; }
         [SerializeField] private float _cascadeDelyaSeconds = 0.3f;
-
 
         private BoardGrid _boardGrid;
         private bool _isMerging;
@@ -27,7 +25,6 @@ namespace HexSort.MergeSystem
             if (_isMerging)
                 return;
 
-            Debug.Log("Start merging");
             StartCoroutine(MergeSequence(placedPosition));
         }
 

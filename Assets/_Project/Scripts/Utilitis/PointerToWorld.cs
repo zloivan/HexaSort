@@ -8,9 +8,7 @@ namespace HexSort.Utilitis
 
         [SerializeField] private LayerMask _availableLayers;
         [SerializeField] private Camera _camera;
-        [SerializeField] private Transform _debugView;
         
-
         private void Awake()
         {
             _camera ??= Camera.main;
@@ -32,17 +30,6 @@ namespace HexSort.Utilitis
                 ? default
                 : hit;
         }
-
-        private void Update()
-        {
-            if (_debugView == null)
-            {
-                return;
-            }
-
-            _debugView.transform.position = GetPointerPositionInWorld();
-        }
-
 
         private static Vector3 GetScreenPosition()
         {
