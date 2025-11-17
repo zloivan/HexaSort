@@ -30,7 +30,7 @@ namespace HexSort.Board
 
             
             //TODO: DEBUG LOGIC
-           // _gridSystemHex.CreateDebugObjects(_gridDebug.transform, transform);
+            _gridSystemHex.CreateDebugObjects(_gridDebug.transform, transform);
         }
 
         public int GetWidth() =>

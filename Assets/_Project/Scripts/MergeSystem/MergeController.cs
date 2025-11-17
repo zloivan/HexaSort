@@ -52,6 +52,8 @@ namespace HexSort.MergeSystem
             if (!operation.HasValue)
                 yield break;
 
+            //TODO: TEMP REMOVE LATER
+            Debug.Log(operation.Value.DebugReason);
             MergeExecutor.ExecuteMerge(operation.Value, _boardGrid);
             //TODO: SIGNAL
             yield return new WaitForSeconds(_cascadeDelyaSeconds);

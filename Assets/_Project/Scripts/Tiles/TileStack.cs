@@ -103,8 +103,8 @@ namespace HexSort.Tiles
 
         public override string ToString()
         {
-            var sb = new StringBuilder($"Stack with: {_tiles.Count} tiles");
-            for (var i = _tiles.Count; i >= 0; i--)
+            var sb = new StringBuilder($"Stack with: {_tiles.Count} tiles\n");
+            for (var i = _tiles.Count - 1; i >= 0; i--)
             {
                 sb.AppendLine(_tiles[i].GetColor().ToString());
             }
