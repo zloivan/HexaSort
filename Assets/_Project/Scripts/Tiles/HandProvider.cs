@@ -12,6 +12,8 @@ namespace HexSort.Tiles
         private const int MAX_TILES_OF_SAME_COLOR_IN_STACK = 3;
         private const int MIN_TILES_OF_SAME_COLOR_IN_STACK = 1;
 
+        private const int HAND_SIZE = 3;
+
         [SerializeField] private List<Transform> _spawnPositions;
         [SerializeField] private GameObject _stackPrefab;
         [SerializeField] private TilesVisualSpawner _tileVisualSpawner;
@@ -27,7 +29,7 @@ namespace HexSort.Tiles
         {
             ClearCurrentStack();
 
-            for (int i = 0; i < _spawnPositions.Count; i++)
+            for (var i = 0; i < _spawnPositions.Count; i++)
             {
                 var stackGo = Instantiate(_stackPrefab, _spawnPositions[i].position, Quaternion.identity);
                 var stackVisual = stackGo.GetComponent<TileStack>();
@@ -40,15 +42,23 @@ namespace HexSort.Tiles
         private void GenerateRandomStack(TileStack stackVisual)
         {
             var colorCount = Random.Range(MIN_COLORS_IN_STACK, MAX_COLORS_IN_STACK);
+            var newTiles = new List<ColoredTile>();
+            var colorsUsed = new HashSet<TileColor>();
 
-            List<ColoredTile> newTiles = new List<ColoredTile>();
-            for (int i = 0; i < colorCount; i++)
+            for (var i = 0; i < colorCount; i++)
             {
-                var coloredTile = ColoredTileFactory.CreateRandomTile();
+                //Don't allow multiple blocks of the same color in one stack
+                TileColor tileColor;
+                do
+                {
+                    tileColor = ColoredTileFactory.CreateRandomTile().GetColor();
+                } while (!colorsUsed.Add(tileColor));
+
                 var tilesOfThisColor = Random.Range(MIN_TILES_OF_SAME_COLOR_IN_STACK, MAX_TILES_OF_SAME_COLOR_IN_STACK);
+
                 for (var j = 0; j < tilesOfThisColor; j++)
                 {
-                    newTiles.Add(ColoredTileFactory.CreateTile(coloredTile.GetColor()));
+                    newTiles.Add(ColoredTileFactory.CreateTile(tileColor));
                 }
             }
 
