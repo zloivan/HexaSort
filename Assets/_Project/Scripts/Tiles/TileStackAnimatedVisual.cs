@@ -98,6 +98,9 @@ namespace HexSort.Tiles
 
         private IEnumerator AnimateTileToPosition(TileVisual tile, Vector3 targetPosition, float duration)
         {
+            if (tile == null)
+                yield break;
+            
             var startPosition = tile.transform.localPosition;
             var elapsed = 0f;
 

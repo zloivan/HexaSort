@@ -122,7 +122,6 @@ namespace HexSort.MergeSystem
                     }
                 }
 
-
                 if (_boardGrid.GetStackAt(operation.Value.From) != null && !currentDirty.Contains(operation.Value.From))
                 {
                     currentDirty.Add(operation.Value.From);
