@@ -4,12 +4,9 @@ using HexSort.Grid;
 
 namespace HexSort.MergeSystem.Rules
 {
-    /// <summary>
-    /// Prioritizes gathering all matching tiles from ALL neighbors into the placed stack
-    /// </summary>
     public class ConsolidationRule : IMergeRule
     {
-        private const float SCORE_BASE = 500f; // Very high base score to prioritize consolidation
+        private const float SCORE_BASE = 500f;
         private const float SCORE_PER_CONTRIBUTING_NEIGHBOR = 100f;
         private const float SCORE_PER_TILE = 5f;
 
@@ -19,21 +16,19 @@ namespace HexSort.MergeSystem.Rules
             var sourceStack = grid.GetStackAt(sourcePos);
 
             if (sourceStack == null)
-            {
                 return operations;
-            }
 
             var sourceTopColor = sourceStack.GetTopColor();
             var neighborPositions = grid.GetNeighbors(sourcePos);
             var contributingNeighbors = new List<(GridPosition pos, int blockCount)>();
 
-            // First pass: find all neighbors that can contribute
             foreach (var neighborPos in neighborPositions)
             {
                 if (!grid.IsValidGridPosition(neighborPos))
                     continue;
 
                 var neighborStack = grid.GetStackAt(neighborPos);
+                
                 if (neighborStack == null)
                     continue;
 
@@ -41,25 +36,22 @@ namespace HexSort.MergeSystem.Rules
                     continue;
 
                 var blockCount = neighborStack.GetTopColorBlockCount();
-                if (blockCount > 0)
-                {
+                
+                if (blockCount > 0) 
                     contributingNeighbors.Add((neighborPos, blockCount));
-                }
             }
 
-            // Only create consolidation operations if multiple neighbors can contribute
             if (contributingNeighbors.Count >= 2)
             {
                 var totalTiles = 0;
-                foreach (var (_, blockCount) in contributingNeighbors)
+                foreach (var neighbor in contributingNeighbors)
                 {
-                    totalTiles += blockCount;
+                    totalTiles += neighbor.blockCount;
                 }
 
-                // Create high-priority inbound operation for EACH contributing neighbor
                 foreach (var (neighborPos, blockCount) in contributingNeighbors)
                 {
-                    var score = SCORE_BASE 
+                    var score = SCORE_BASE
                                 + contributingNeighbors.Count * SCORE_PER_CONTRIBUTING_NEIGHBOR
                                 + totalTiles * SCORE_PER_TILE;
 

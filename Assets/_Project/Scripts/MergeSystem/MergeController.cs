@@ -39,39 +39,84 @@ namespace HexSort.MergeSystem
         private IEnumerator CheckDestruction(List<GridPosition> gridPositions)
         {
             var anyDestroyed = false;
+            var affectedByDestruction = new HashSet<GridPosition>();
+
 
             foreach (var position in gridPositions)
             {
                 if (!_boardGrid.IsValidGridPosition(position))
                     continue;
 
-                if (MergeExecutor.CheckAndDestroyStack(position, _boardGrid)) 
+                var neighbors = _boardGrid.GetNeighbors(position);
+
+                if (MergeExecutor.CheckAndDestroyStack(position, _boardGrid))
+                {
                     anyDestroyed = true;
+
+                    foreach (var neighbor in neighbors)
+                    {
+                        if (_boardGrid.IsValidGridPosition(neighbor) && _boardGrid.GetStackAt(neighbor) != null)
+                        {
+                            affectedByDestruction.Add(neighbor);
+                        }
+                    }
+                }
             }
 
             if (anyDestroyed)
                 //TODO: SIGNAL
+            {
+                foreach (var position in affectedByDestruction)
+                {
+                    if (!gridPositions.Contains(position))
+                    {
+                        gridPositions.Add(position);
+                    }
+                }
+
                 yield return new WaitForSeconds(_cascadeDelyaSeconds);
+            }
         }
 
         private IEnumerator CascadeLoop(List<GridPosition> dirtyPos)
         {
-            var currentDirty = new List<GridPosition>(dirtyPos);
-    
+            //Safety
+            const int MAX_INTERATIONS = 100;
+
+            var currentDirty = new HashSet<GridPosition>(dirtyPos);
+            var iterationsCount = 0;
+
             while (currentDirty.Count > 0)
             {
-                var operation = MergeAnalyzer.FindBestMergeFromMultiple(currentDirty, _boardGrid);
-                if (!operation.HasValue)
+                iterationsCount++;
+                if (iterationsCount > MAX_INTERATIONS)
+                {
+                    Debug.LogError($"CascadeLoop exceeds max iterations ({MAX_INTERATIONS})");
                     break;
+                }
 
-                MergeExecutor.ExecuteMerge(operation.Value, _boardGrid);
+                Debug.Log($"[Cascade Iteration {iterationsCount}] Analyzing {currentDirty.Count} dirty position");
+
+                var operation =
+                    MergeAnalyzer.FindBestMergeFromMultiple(new List<GridPosition>(currentDirty), _boardGrid);
+
+                if (!operation.HasValue)
+                {
+                    Debug.Log($"[Cascade Complete] No more valid merges found after ({iterationsCount}) iterations");
+                    break;
+                }
+
+                Debug.Log($"[Merge]{operation.Value.DebugReason}");
                 
+                MergeExecutor.ExecuteMerge(operation.Value, _boardGrid);
+
                 yield return new WaitForSeconds(_cascadeDelyaSeconds);
 
-                var affectedPositions = new List<GridPosition> { operation.Value.From, operation.Value.To };
-                yield return CheckDestruction(affectedPositions);
-                
+                var positionsToCheckForDestruction = new List<GridPosition> { operation.Value.From, operation.Value.To };
+                yield return CheckDestruction(positionsToCheckForDestruction);
+
                 currentDirty = MergeAnalyzer.GetAffectedPositions(operation.Value, _boardGrid);
+                Debug.Log($"[Next Iteration] {currentDirty.Count} positions marked dirty for next pass");
             }
         }
     }
