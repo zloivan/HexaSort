@@ -98,10 +98,8 @@ namespace HexSort.Tiles
 
         private IEnumerator AnimateTileToPosition(TileVisual tile, Vector3 targetPosition, float duration)
         {
-            if (tile == null)
-                yield break;
-            
-            var startPosition = tile.transform.localPosition;
+            var tileTransform = tile.transform;
+            var startPosition = tileTransform.localPosition;
             var elapsed = 0f;
 
             while (elapsed < duration)
@@ -110,12 +108,16 @@ namespace HexSort.Tiles
                 var t = elapsed / duration;
 
                 t = 1f - Mathf.Pow(1f - t, 3);
-
-                tile.transform.localPosition = Vector3.Lerp(startPosition, targetPosition, t);
+        
+                if (tileTransform == null)
+                    yield break;
+        
+                tileTransform.localPosition = Vector3.Lerp(startPosition, targetPosition, t);
                 yield return null;
             }
 
-            tile.transform.localPosition = targetPosition;
+            if (tileTransform != null)
+                tileTransform.localPosition = targetPosition;
         }
 
         private void RebuildVisualsInstantly(List<ColoredTile> tiles)

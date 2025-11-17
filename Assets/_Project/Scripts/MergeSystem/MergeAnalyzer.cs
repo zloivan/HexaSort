@@ -52,5 +52,45 @@ namespace HexSort.MergeSystem
 
             return allOperations[0];
         }
+        
+        public static List<GridPosition> GetAffectedPositions(MergeOperation operation, BoardGrid grid)
+        {
+            var affected = new List<GridPosition>();
+        
+            if (grid.GetStackAt(operation.To) != null)
+            {
+                affected.Add(operation.To);
+                AddMatchingNeighbors(operation.To, grid, affected);
+            }
+    
+            if (grid.GetStackAt(operation.From) != null)
+            {
+                if (!affected.Contains(operation.From))
+                    affected.Add(operation.From);
+                AddMatchingNeighbors(operation.From, grid, affected);
+            }
+    
+            return affected;
+        }
+
+        private static void AddMatchingNeighbors(GridPosition position, BoardGrid grid, List<GridPosition> affected)
+        {
+            var stack = grid.GetStackAt(position);
+            var topColor = stack.GetTopColor();
+            var neighbors = grid.GetNeighbors(position);
+    
+            foreach (var neighbor in neighbors)
+            {
+                if (!grid.IsValidGridPosition(neighbor)) continue;
+        
+                var neighborStack = grid.GetStackAt(neighbor);
+                if (neighborStack == null) continue;
+        
+                if (neighborStack.GetTopColor() == topColor && !affected.Contains(neighbor))
+                {
+                    affected.Add(neighbor);
+                }
+            }
+        }
     }
 }
