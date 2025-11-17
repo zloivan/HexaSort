@@ -1,0 +1,573 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4efbccec194a2680a882b4bd5ab009, type: 3}
+  m_Name: MockDataSet
+  m_EditorClassIdentifier: 
+  Stacks:
+  - Description: Mono Red x3
+    ColorBlocks:
+    - Color: 0
+      Count: 3
+  - Description: Mono Green x3
+    ColorBlocks:
+    - Color: 1
+      Count: 3
+  - Description: Mono Blue x3
+    ColorBlocks:
+    - Color: 2
+      Count: 3
+  - Description: Mono Yellow x3
+    ColorBlocks:
+    - Color: 3
+      Count: 3
+  - Description: Mono Purple x3
+    ColorBlocks:
+    - Color: 4
+      Count: 3
+  - Description: Mono Red x3
+    ColorBlocks:
+    - Color: 0
+      Count: 3
+  - Description: Mono Green x3
+    ColorBlocks:
+    - Color: 1
+      Count: 3
+  - Description: Mono Blue x3
+    ColorBlocks:
+    - Color: 2
+      Count: 3
+  - Description: Mono Yellow x3
+    ColorBlocks:
+    - Color: 3
+      Count: 3
+  - Description: Mono Purple x3
+    ColorBlocks:
+    - Color: 4
+      Count: 3
+  - Description: 'Two-color: Red(2) + Green(2)'
+    ColorBlocks:
+    - Color: 0
+      Count: 2
+    - Color: 1
+      Count: 2
+  - Description: 'Two-color: Green(2) + Blue(2)'
+    ColorBlocks:
+    - Color: 1
+      Count: 2
+    - Color: 2
+      Count: 2
+  - Description: 'Two-color: Blue(2) + Yellow(2)'
+    ColorBlocks:
+    - Color: 2
+      Count: 2
+    - Color: 3
+      Count: 2
+  - Description: 'Two-color: Yellow(2) + Purple(2)'
+    ColorBlocks:
+    - Color: 3
+      Count: 2
+    - Color: 4
+      Count: 2
+  - Description: 'Two-color: Purple(2) + Red(2)'
+    ColorBlocks:
+    - Color: 4
+      Count: 2
+    - Color: 0
+      Count: 2
+  - Description: 'Two-color: Red(2) + Green(2)'
+    ColorBlocks:
+    - Color: 0
+      Count: 2
+    - Color: 1
+      Count: 2
+  - Description: 'Two-color: Green(2) + Blue(2)'
+    ColorBlocks:
+    - Color: 1
+      Count: 2
+    - Color: 2
+      Count: 2
+  - Description: 'Two-color: Blue(2) + Yellow(2)'
+    ColorBlocks:
+    - Color: 2
+      Count: 2
+    - Color: 3
+      Count: 2
+  - Description: 'Two-color: Yellow(2) + Purple(2)'
+    ColorBlocks:
+    - Color: 3
+      Count: 2
+    - Color: 4
+      Count: 2
+  - Description: 'Two-color: Purple(2) + Red(2)'
+    ColorBlocks:
+    - Color: 4
+      Count: 2
+    - Color: 0
+      Count: 2
+  - Description: 'Two-color: Red(2) + Green(2)'
+    ColorBlocks:
+    - Color: 0
+      Count: 2
+    - Color: 1
+      Count: 2
+  - Description: 'Two-color: Green(2) + Blue(2)'
+    ColorBlocks:
+    - Color: 1
+      Count: 2
+    - Color: 2
+      Count: 2
+  - Description: 'Two-color: Blue(2) + Yellow(2)'
+    ColorBlocks:
+    - Color: 2
+      Count: 2
+    - Color: 3
+      Count: 2
+  - Description: 'Two-color: Yellow(2) + Purple(2)'
+    ColorBlocks:
+    - Color: 3
+      Count: 2
+    - Color: 4
+      Count: 2
+  - Description: 'Two-color: Purple(2) + Red(2)'
+    ColorBlocks:
+    - Color: 4
+      Count: 2
+    - Color: 0
+      Count: 2
+  - Description: 'Two-color: Red(2) + Green(2)'
+    ColorBlocks:
+    - Color: 0
+      Count: 2
+    - Color: 1
+      Count: 2
+  - Description: 'Two-color: Green(2) + Blue(2)'
+    ColorBlocks:
+    - Color: 1
+      Count: 2
+    - Color: 2
+      Count: 2
+  - Description: 'Two-color: Blue(2) + Yellow(2)'
+    ColorBlocks:
+    - Color: 2
+      Count: 2
+    - Color: 3
+      Count: 2
+  - Description: 'Two-color: Yellow(2) + Purple(2)'
+    ColorBlocks:
+    - Color: 3
+      Count: 2
+    - Color: 4
+      Count: 2
+  - Description: 'Two-color: Purple(2) + Red(2)'
+    ColorBlocks:
+    - Color: 4
+      Count: 2
+    - Color: 0
+      Count: 2
+  - Description: 'Three-color: Red(2) + Green(2) + Blue(1)'
+    ColorBlocks:
+    - Color: 0
+      Count: 2
+    - Color: 1
+      Count: 2
+    - Color: 2
+      Count: 1
+  - Description: 'Three-color: Green(2) + Blue(2) + Yellow(1)'
+    ColorBlocks:
+    - Color: 1
+      Count: 2
+    - Color: 2
+      Count: 2
+    - Color: 3
+      Count: 1
+  - Description: 'Three-color: Blue(2) + Yellow(2) + Purple(1)'
+    ColorBlocks:
+    - Color: 2
+      Count: 2
+    - Color: 3
+      Count: 2
+    - Color: 4
+      Count: 1
+  - Description: 'Three-color: Yellow(2) + Purple(2) + Red(1)'
+    ColorBlocks:
+    - Color: 3
+      Count: 2
+    - Color: 4
+      Count: 2
+    - Color: 0
+      Count: 1
+  - Description: 'Three-color: Purple(2) + Red(2) + Green(1)'
+    ColorBlocks:
+    - Color: 4
+      Count: 2
+    - Color: 0
+      Count: 2
+    - Color: 1
+      Count: 1
+  - Description: 'Three-color: Red(2) + Green(2) + Blue(1)'
+    ColorBlocks:
+    - Color: 0
+      Count: 2
+    - Color: 1
+      Count: 2
+    - Color: 2
+      Count: 1
+  - Description: 'Three-color: Green(2) + Blue(2) + Yellow(1)'
+    ColorBlocks:
+    - Color: 1
+      Count: 2
+    - Color: 2
+      Count: 2
+    - Color: 3
+      Count: 1
+  - Description: 'Three-color: Blue(2) + Yellow(2) + Purple(1)'
+    ColorBlocks:
+    - Color: 2
+      Count: 2
+    - Color: 3
+      Count: 2
+    - Color: 4
+      Count: 1
+  - Description: 'Three-color: Yellow(2) + Purple(2) + Red(1)'
+    ColorBlocks:
+    - Color: 3
+      Count: 2
+    - Color: 4
+      Count: 2
+    - Color: 0
+      Count: 1
+  - Description: 'Three-color: Purple(2) + Red(2) + Green(1)'
+    ColorBlocks:
+    - Color: 4
+      Count: 2
+    - Color: 0
+      Count: 2
+    - Color: 1
+      Count: 1
+  - Description: 'Three-color: Red(2) + Green(2) + Blue(1)'
+    ColorBlocks:
+    - Color: 0
+      Count: 2
+    - Color: 1
+      Count: 2
+    - Color: 2
+      Count: 1
+  - Description: 'Three-color: Green(2) + Blue(2) + Yellow(1)'
+    ColorBlocks:
+    - Color: 1
+      Count: 2
+    - Color: 2
+      Count: 2
+    - Color: 3
+      Count: 1
+  - Description: 'Three-color: Blue(2) + Yellow(2) + Purple(1)'
+    ColorBlocks:
+    - Color: 2
+      Count: 2
+    - Color: 3
+      Count: 2
+    - Color: 4
+      Count: 1
+  - Description: 'Three-color: Yellow(2) + Purple(2) + Red(1)'
+    ColorBlocks:
+    - Color: 3
+      Count: 2
+    - Color: 4
+      Count: 2
+    - Color: 0
+      Count: 1
+  - Description: 'Three-color: Purple(2) + Red(2) + Green(1)'
+    ColorBlocks:
+    - Color: 4
+      Count: 2
+    - Color: 0
+      Count: 2
+    - Color: 1
+      Count: 1
+  - Description: 'Three-color: Red(2) + Green(2) + Blue(1)'
+    ColorBlocks:
+    - Color: 0
+      Count: 2
+    - Color: 1
+      Count: 2
+    - Color: 2
+      Count: 1
+  - Description: 'Three-color: Green(2) + Blue(2) + Yellow(1)'
+    ColorBlocks:
+    - Color: 1
+      Count: 2
+    - Color: 2
+      Count: 2
+    - Color: 3
+      Count: 1
+  - Description: 'Three-color: Blue(2) + Yellow(2) + Purple(1)'
+    ColorBlocks:
+    - Color: 2
+      Count: 2
+    - Color: 3
+      Count: 2
+    - Color: 4
+      Count: 1
+  - Description: 'Three-color: Yellow(2) + Purple(2) + Red(1)'
+    ColorBlocks:
+    - Color: 3
+      Count: 2
+    - Color: 4
+      Count: 2
+    - Color: 0
+      Count: 1
+  - Description: 'Three-color: Purple(2) + Red(2) + Green(1)'
+    ColorBlocks:
+    - Color: 4
+      Count: 2
+    - Color: 0
+      Count: 2
+    - Color: 1
+      Count: 1
+  - Description: 'Large block: Red x5'
+    ColorBlocks:
+    - Color: 0
+      Count: 5
+  - Description: 'Large block: Green x6'
+    ColorBlocks:
+    - Color: 1
+      Count: 6
+  - Description: 'Large block: Blue x7'
+    ColorBlocks:
+    - Color: 2
+      Count: 7
+  - Description: 'Large block: Yellow x5'
+    ColorBlocks:
+    - Color: 3
+      Count: 5
+  - Description: 'Large block: Purple x6'
+    ColorBlocks:
+    - Color: 4
+      Count: 6
+  - Description: 'Large block: Red x7'
+    ColorBlocks:
+    - Color: 0
+      Count: 7
+  - Description: 'Large block: Green x5'
+    ColorBlocks:
+    - Color: 1
+      Count: 5
+  - Description: 'Large block: Blue x6'
+    ColorBlocks:
+    - Color: 2
+      Count: 6
+  - Description: 'Large block: Yellow x7'
+    ColorBlocks:
+    - Color: 3
+      Count: 7
+  - Description: 'Large block: Purple x5'
+    ColorBlocks:
+    - Color: 4
+      Count: 5
+  - Description: 'Large block: Red x6'
+    ColorBlocks:
+    - Color: 0
+      Count: 6
+  - Description: 'Large block: Green x7'
+    ColorBlocks:
+    - Color: 1
+      Count: 7
+  - Description: 'Large block: Blue x5'
+    ColorBlocks:
+    - Color: 2
+      Count: 5
+  - Description: 'Large block: Yellow x6'
+    ColorBlocks:
+    - Color: 3
+      Count: 6
+  - Description: 'Large block: Purple x7'
+    ColorBlocks:
+    - Color: 4
+      Count: 7
+  - Description: 'Consolidation test: Red(3)'
+    ColorBlocks:
+    - Color: 0
+      Count: 3
+  - Description: 'Consolidation test: Green(3)'
+    ColorBlocks:
+    - Color: 1
+      Count: 3
+  - Description: 'Consolidation test: Blue(3)'
+    ColorBlocks:
+    - Color: 2
+      Count: 3
+  - Description: 'Consolidation test: Yellow(3)'
+    ColorBlocks:
+    - Color: 3
+      Count: 3
+  - Description: 'Consolidation test: Purple(3)'
+    ColorBlocks:
+    - Color: 4
+      Count: 3
+  - Description: 'Consolidation test: Red(3)'
+    ColorBlocks:
+    - Color: 0
+      Count: 3
+  - Description: 'Consolidation test: Green(3)'
+    ColorBlocks:
+    - Color: 1
+      Count: 3
+  - Description: 'Consolidation test: Blue(3)'
+    ColorBlocks:
+    - Color: 2
+      Count: 3
+  - Description: 'Consolidation test: Yellow(3)'
+    ColorBlocks:
+    - Color: 3
+      Count: 3
+  - Description: 'Consolidation test: Purple(3)'
+    ColorBlocks:
+    - Color: 4
+      Count: 3
+  - Description: 'Consolidation test: Red(3)'
+    ColorBlocks:
+    - Color: 0
+      Count: 3
+  - Description: 'Consolidation test: Green(3)'
+    ColorBlocks:
+    - Color: 1
+      Count: 3
+  - Description: 'Consolidation test: Blue(3)'
+    ColorBlocks:
+    - Color: 2
+      Count: 3
+  - Description: 'Consolidation test: Yellow(3)'
+    ColorBlocks:
+    - Color: 3
+      Count: 3
+  - Description: 'Consolidation test: Purple(3)'
+    ColorBlocks:
+    - Color: 4
+      Count: 3
+  - Description: 'Outbound: Red(2) + Blue(3)'
+    ColorBlocks:
+    - Color: 0
+      Count: 2
+    - Color: 2
+      Count: 3
+  - Description: 'Outbound: Green(2) + Yellow(3)'
+    ColorBlocks:
+    - Color: 1
+      Count: 2
+    - Color: 3
+      Count: 3
+  - Description: 'Outbound: Blue(2) + Purple(3)'
+    ColorBlocks:
+    - Color: 2
+      Count: 2
+    - Color: 4
+      Count: 3
+  - Description: 'Outbound: Yellow(2) + Red(3)'
+    ColorBlocks:
+    - Color: 3
+      Count: 2
+    - Color: 0
+      Count: 3
+  - Description: 'Outbound: Purple(2) + Green(3)'
+    ColorBlocks:
+    - Color: 4
+      Count: 2
+    - Color: 1
+      Count: 3
+  - Description: 'Outbound: Red(2) + Blue(3)'
+    ColorBlocks:
+    - Color: 0
+      Count: 2
+    - Color: 2
+      Count: 3
+  - Description: 'Outbound: Green(2) + Yellow(3)'
+    ColorBlocks:
+    - Color: 1
+      Count: 2
+    - Color: 3
+      Count: 3
+  - Description: 'Outbound: Blue(2) + Purple(3)'
+    ColorBlocks:
+    - Color: 2
+      Count: 2
+    - Color: 4
+      Count: 3
+  - Description: 'Outbound: Yellow(2) + Red(3)'
+    ColorBlocks:
+    - Color: 3
+      Count: 2
+    - Color: 0
+      Count: 3
+  - Description: 'Outbound: Purple(2) + Green(3)'
+    ColorBlocks:
+    - Color: 4
+      Count: 2
+    - Color: 1
+      Count: 3
+  - Description: Single Red
+    ColorBlocks:
+    - Color: 0
+      Count: 1
+  - Description: Single Blue
+    ColorBlocks:
+    - Color: 2
+      Count: 1
+  - Description: Single Green
+    ColorBlocks:
+    - Color: 1
+      Count: 1
+  - Description: Four colors
+    ColorBlocks:
+    - Color: 0
+      Count: 1
+    - Color: 2
+      Count: 1
+    - Color: 1
+      Count: 1
+    - Color: 3
+      Count: 1
+  - Description: 'Almost destroyable: Red x9'
+    ColorBlocks:
+    - Color: 0
+      Count: 9
+  - Description: 'Exactly destroyable: Blue x10'
+    ColorBlocks:
+    - Color: 2
+      Count: 10
+  - Description: Alternating small
+    ColorBlocks:
+    - Color: 0
+      Count: 1
+    - Color: 2
+      Count: 1
+    - Color: 0
+      Count: 1
+  - Description: Heavy bottom
+    ColorBlocks:
+    - Color: 4
+      Count: 5
+    - Color: 3
+      Count: 1
+  - Description: Heavy top
+    ColorBlocks:
+    - Color: 1
+      Count: 1
+    - Color: 0
+      Count: 5
+  - Description: Symmetric
+    ColorBlocks:
+    - Color: 2
+      Count: 2
+    - Color: 3
+      Count: 2
+    - Color: 2
+      Count: 2
