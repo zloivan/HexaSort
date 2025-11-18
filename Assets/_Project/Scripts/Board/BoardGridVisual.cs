@@ -44,15 +44,11 @@ namespace HexSort.Board
             var worldPointerPosition = PointerToWorld.GetPointerPositionInWorld();
             var newSelected = _boardGrid.GetGridPosition(worldPointerPosition);
 
-            var isValid = _boardGrid.IsValidGridPosition(newSelected);
-
-            if (newSelected == _selectedGridPosition || !isValid)
+            if (newSelected == _selectedGridPosition || !_boardGrid.IsValidGridPosition(newSelected))
                 return;
 
-            if (_boardGrid.IsValidGridPosition(_selectedGridPosition))
-            {
+            if (_boardGrid.IsValidGridPosition(_selectedGridPosition)) 
                 _boarGridVisuals[_selectedGridPosition.X, _selectedGridPosition.Z].RemoveHighlight();
-            }
             
             _selectedGridPosition = newSelected;
             _boarGridVisuals[_selectedGridPosition.X, _selectedGridPosition.Z].Highlight();
@@ -61,7 +57,6 @@ namespace HexSort.Board
         private void UpdateVisuals()
         {
             HideAllVisuals();
-
             
             //TODO: TEMP
             ShowGridVisualList(_boardGrid.GetAllGridPositions(), GridVisualType.White);

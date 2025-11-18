@@ -19,14 +19,11 @@ namespace HexSort.MergeSystem.Rules
                 return operations;
 
             var sourceTopColor = sourceStack.GetTopColor();
-            var neighborPositions = grid.GetNeighbors(sourcePos);
+            var neighborPositions = grid.GetValidNeighbors(sourcePos);
             var contributingNeighbors = new List<(GridPosition pos, int blockCount)>();
 
             foreach (var neighborPos in neighborPositions)
             {
-                if (!grid.IsValidGridPosition(neighborPos))
-                    continue;
-
                 var neighborStack = grid.GetStackAt(neighborPos);
                 
                 if (neighborStack == null)

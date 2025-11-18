@@ -41,13 +41,12 @@ namespace HexSort.MergeSystem
             var anyDestroyed = false;
             var affectedByDestruction = new HashSet<GridPosition>();
 
-
             foreach (var position in gridPositions)
             {
                 if (!_boardGrid.IsValidGridPosition(position))
                     continue;
 
-                var neighbors = _boardGrid.GetNeighbors(position);
+                var neighbors = _boardGrid.GetValidNeighbors(position);
 
                 if (MergeExecutor.CheckAndDestroyStack(position, _boardGrid))
                 {
@@ -55,7 +54,7 @@ namespace HexSort.MergeSystem
 
                     foreach (var neighbor in neighbors)
                     {
-                        if (_boardGrid.IsValidGridPosition(neighbor) && _boardGrid.GetStackAt(neighbor) != null)
+                        if (_boardGrid.GetStackAt(neighbor) != null)
                         {
                             affectedByDestruction.Add(neighbor);
                         }

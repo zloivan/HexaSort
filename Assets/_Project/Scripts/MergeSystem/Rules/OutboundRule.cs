@@ -23,31 +23,21 @@ namespace HexSort.MergeSystem.Rules
             }
 
             var sourceTopColor = sourceStack.GetTopColor();
-            var neighborPositions = grid.GetNeighbors(sourcePos);
+            var neighborPositions = grid.GetValidNeighbors(sourcePos);
 
             foreach (var neighborPos in neighborPositions)
             {
-                if (!grid.IsValidGridPosition(neighborPos))
-                {
-                    continue;
-                }
-
                 var neighborStack = grid.GetStackAt(neighborPos);
+                
                 if (neighborStack == null)
-                {
                     continue;
-                }
 
                 if (neighborStack.GetTopColor() != sourceTopColor)
-                {
                     continue;
-                }
 
                 var blockCount = sourceStack.GetTopColorBlockCount();
                 if (blockCount <= 0)
-                {
                     continue;
-                }
 
                 var score = CalculateScore(neighborStack, sourceStack, blockCount);
 

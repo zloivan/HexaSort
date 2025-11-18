@@ -9,7 +9,6 @@ namespace HexSort.MergeSystem
     {
         private static readonly List<IMergeRule> _rules = new()
         {
-            new ConsolidationRule(),
             new InboundRule(),
             new OutboundRule(),
         };
@@ -82,12 +81,10 @@ namespace HexSort.MergeSystem
             }
 
             var topColor = stack.GetTopColor();
-            var neighbors = grid.GetNeighbors(position);
+            var neighbors = grid.GetValidNeighbors(position);
 
             foreach (var neighbor in neighbors)
             {
-                if (!grid.IsValidGridPosition(neighbor)) continue;
-
                 var neighborStack = grid.GetStackAt(neighbor);
                 if (neighborStack == null) continue;
 

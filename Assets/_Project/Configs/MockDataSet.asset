@@ -12,7 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e4efbccec194a2680a882b4bd5ab009, type: 3}
   m_Name: MockDataSet
   m_EditorClassIdentifier: 
-  Stacks:
+  _stacks:
+  - Description: Mono Yellow x3
+    ColorBlocks:
+    - Color: 3
+      Count: 3
+  - Description: Mono Yellow x3
+    ColorBlocks:
+    - Color: 3
+      Count: 3
+  - Description: Mono Yellow x3
+    ColorBlocks:
+    - Color: 3
+      Count: 3
   - Description: Mono Red x3
     ColorBlocks:
     - Color: 0
@@ -24,10 +36,6 @@ MonoBehaviour:
   - Description: Mono Blue x3
     ColorBlocks:
     - Color: 2
-      Count: 3
-  - Description: Mono Yellow x3
-    ColorBlocks:
-    - Color: 3
       Count: 3
   - Description: Mono Purple x3
     ColorBlocks:
@@ -44,10 +52,6 @@ MonoBehaviour:
   - Description: Mono Blue x3
     ColorBlocks:
     - Color: 2
-      Count: 3
-  - Description: Mono Yellow x3
-    ColorBlocks:
-    - Color: 3
       Count: 3
   - Description: Mono Purple x3
     ColorBlocks:

@@ -11,6 +11,7 @@ namespace HexSort.MergeSystem.Rules
         private const float SCORE_PER_TILE = 2f;
         private const float SCORE_WILL_DESTROY = 150f;
         private const float SCORE_WILL_MAKE_MONO = 75f;
+        private const float SCORE_PER_EXTRA_MACTHG_NEIGHBOR = 200f;
 
         public List<MergeOperation> Analyze(GridPosition sourcePos, BoardGrid grid)
         {
@@ -18,21 +19,14 @@ namespace HexSort.MergeSystem.Rules
             var sourceStack = grid.GetStackAt(sourcePos);
 
             if (sourceStack == null)
-            {
                 return operations;
-            }
 
             var sourceTopColor = sourceStack.GetTopColor();
-            var neighborPositions = grid.GetNeighbors(sourcePos);
+            var neighborPositions = grid.GetValidNeighbors(sourcePos);
 
 
             foreach (var neighborPos in neighborPositions)
             {
-                if (!grid.IsValidGridPosition(neighborPos))
-                {
-                    continue;
-                }
-
                 var neighborStack = grid.GetStackAt(neighborPos);
                 if (neighborStack == null)
                 {

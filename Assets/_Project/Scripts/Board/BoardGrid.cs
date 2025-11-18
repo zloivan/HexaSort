@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using HexSort.Grid;
 using HexSort.Tiles;
 using UnityEngine;
@@ -66,8 +67,11 @@ namespace HexSort.Board
             return result;
         }
 
-        public List<GridPosition> GetNeighbors(GridPosition getGridPosition) =>
-            _gridSystemHex.GetNeighbors(getGridPosition);
+        public List<GridPosition> GetNeighbors(GridPosition targetPosition) =>
+            _gridSystemHex.GetNeighbors(targetPosition);
+
+        public List<GridPosition> GetValidNeighbors(GridPosition targetPosition) =>
+            GetNeighbors(targetPosition).Where(IsValidGridPosition).ToList();
 
         public bool IsSlotEmpty(GridPosition gridPos) =>
             _gridSystemHex.GetGridObject(gridPos).GetStack() == null;
