@@ -10,9 +10,9 @@ namespace HexSort.Tiles
     public class HandProvider : MonoBehaviour
     {
         private const int MIN_COLORS_IN_STACK = 1;
-        private const int MAX_COLORS_IN_STACK = 4;
+        private const int MAX_COLORS_IN_STACK = 3;
 
-        private const int MAX_TILES_OF_SAME_COLOR_IN_STACK = 3;
+        private const int MAX_TILES_OF_SAME_COLOR_IN_STACK = 5;
         private const int MIN_TILES_OF_SAME_COLOR_IN_STACK = 1;
 
         private const int HAND_SIZE = 3;

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using HexSort.Board;
 using HexSort.Grid;
 using HexSort.MergeSystem.Rules;
+using UnityEngine;
 
 namespace HexSort.MergeSystem
 {
@@ -47,8 +48,13 @@ namespace HexSort.MergeSystem
             if (allOperations.Count == 0)
                 return null;
 
+            
             allOperations.Sort((a, b) => b.Score.CompareTo(a.Score));
-
+            for (int i = 0; i < allOperations.Count; i++)
+            {
+                var op = allOperations[i];
+                Debug.Log($"  [{i}] Score: {op.Score}, From: {op.From}, To: {op.To}");
+            }
             return allOperations[0];
         }
 

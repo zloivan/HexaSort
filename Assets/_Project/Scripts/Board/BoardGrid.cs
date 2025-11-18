@@ -19,6 +19,7 @@ namespace HexSort.Board
         [SerializeField] private int _height;
 
         [SerializeField] private GameObject _gridDebug;
+        [SerializeField] private bool _enableDebug;
 
 
         private GridSystemHex<GridObject> _gridSystemHex;
@@ -34,8 +35,8 @@ namespace HexSort.Board
                     (grid, pos) => new GridObject(grid, pos));
 
 
-            //TODO: DEBUG LOGIC
-            _gridSystemHex.CreateDebugObjects(_gridDebug.transform, transform);
+            if (_enableDebug) 
+                _gridSystemHex.CreateDebugObjects(_gridDebug.transform, transform);
         }
 
         public int GetWidth() =>

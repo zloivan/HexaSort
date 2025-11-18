@@ -21,6 +21,26 @@ MonoBehaviour:
     ColorBlocks:
     - Color: 3
       Count: 3
+  - Description: Mono Blue x3
+    ColorBlocks:
+    - Color: 2
+      Count: 3
+  - Description: 'Two-color: Blue(2) + Yellow(2)'
+    ColorBlocks:
+    - Color: 2
+      Count: 2
+    - Color: 3
+      Count: 2
+  - Description: 'Two-color: Yellow(2) + Purple(2)'
+    ColorBlocks:
+    - Color: 3
+      Count: 2
+    - Color: 4
+      Count: 2
+  - Description: Mono Purple x3
+    ColorBlocks:
+    - Color: 4
+      Count: 3
   - Description: Mono Yellow x3
     ColorBlocks:
     - Color: 3
@@ -32,14 +52,6 @@ MonoBehaviour:
   - Description: Mono Green x3
     ColorBlocks:
     - Color: 1
-      Count: 3
-  - Description: Mono Blue x3
-    ColorBlocks:
-    - Color: 2
-      Count: 3
-  - Description: Mono Purple x3
-    ColorBlocks:
-    - Color: 4
       Count: 3
   - Description: Mono Red x3
     ColorBlocks:
@@ -74,12 +86,6 @@ MonoBehaviour:
     - Color: 2
       Count: 2
     - Color: 3
-      Count: 2
-  - Description: 'Two-color: Yellow(2) + Purple(2)'
-    ColorBlocks:
-    - Color: 3
-      Count: 2
-    - Color: 4
       Count: 2
   - Description: 'Two-color: Purple(2) + Red(2)'
     ColorBlocks:
@@ -98,12 +104,6 @@ MonoBehaviour:
     - Color: 1
       Count: 2
     - Color: 2
-      Count: 2
-  - Description: 'Two-color: Blue(2) + Yellow(2)'
-    ColorBlocks:
-    - Color: 2
-      Count: 2
-    - Color: 3
       Count: 2
   - Description: 'Two-color: Yellow(2) + Purple(2)'
     ColorBlocks:
