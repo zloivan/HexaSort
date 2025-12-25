@@ -1,131 +1,100 @@
 # HexaSort
 
-Головоломка на Unity с механикой автоматического слияния цветных плиток на гексагональной сетке.
+A Unity puzzle game with automatic merging mechanics of colored tiles on a hexagonal grid.
 
-## Время разработки
+![Preview](docs/gameplay.gif) 
 
-**4 дня**
+## Development Time
 
-## Паттерны проектирования
+**4 days**
+
+## Design Patterns
 
 Singleton.
-Ты используешь его для BoardGrid и MergeController, чтобы иметь единый точка-доступ к двум самым центральным системам. Да, глобальность — это зло в теории, но в маленькой игре оно упрощает жизнь, всё ок.
+Used for BoardGrid and MergeController to have a single access point to the two most central systems. Yes, globals are evil in theory, but in a small game it simplifies life, it's all good.
 
 Strategy.
-IMergeRule и конкретные реализации (ConsolidationRule, InboundRule, OutboundRule) — это твой способ подсовывать разные алгоритмы слияния без переписывания основного кода. Нужно новое правило? Пиши класс, подключай — done.
+IMergeRule and concrete implementations (ConsolidationRule, InboundRule, OutboundRule) — this is the way to plug in different merge algorithms without rewriting the main code. Need a new rule? Write a class, plug it in — done.
 
 Factory.
-ColoredTileFactory отвечает за создание тайлов и сразу следит, чтобы цвета были валидные. Удобно, чтобы вся логика создания была в одном месте, а не размазана по сцене.
+ColoredTileFactory is responsible for creating tiles and immediately ensures that colors are valid. Convenient to have all creation logic in one place instead of spread across the scene.
 
 Observer.
-События OnNewStackPlaced и OnStackRemoved позволяют BoardGrid просто сообщать миру “эй, тут что-то появилось / исчезло”, и при этом никак не знать, кто там дальше слушает. HandProvider, UI, эффекты — не важно. Красиво и развязано.
+Events OnNewStackPlaced and OnStackRemoved allow BoardGrid to simply tell the world "hey, something appeared/disappeared here", without knowing who's listening. HandProvider, UI, effects — doesn't matter. Clean and decoupled.
 
 DirtyFlag.
-Отвечает за обновление визуальной состовляющей стеков
+Responsible for updating the visual component of stacks
 
-## Небычности в кодстайле
+## Code Style Quirks
 
-**Методы-обработчики событий:**
-- Формат `ИмяКласса_ИмяСобытия`: `BoardGrid_OnNewStackPlaced`
+**Event handler methods:**
+- Format `ClassName_EventName`: `BoardGrid_OnNewStackPlaced`
 
-## Классы и их ответственность
+## Classes and Their Responsibilities
 
 ### Grid System
 
-- **`GridSystemHex<T>`** - Гексагональная сетка. Координаты → мировые позиции, поиск соседей, offset для четных/нечетных рядов
-- **`GridPosition`** - Структура координат (X, Z)
-- **`GridObject`** - Контейнер для TileStack на сетке
-- **`GridDebugObject`** - Визуальный дебаг сетки
+- **`GridSystemHex<T>`** - Hexagonal grid. Coordinates → world positions, neighbor search, offset for even/odd rows
+- **`GridPosition`** - Coordinate structure (X, Z)
+- **`GridObject`** - Container for TileStack on the grid
+- **`GridDebugObject`** - Visual grid debug
 
 ### Board System
 
-- **`BoardGrid`** - Главный контроллер поля. Размещение/удаление стеков, валидация позиций, события
-- **`BoardGridVisual`** - Визуализация сетки, подсветка ячеек при наведении
-- **`BoardGridVisualSingle`** - Одна ячейка визуализации
+- **`BoardGrid`** - Main board controller. Stack placement/removal, position validation, events
+- **`BoardGridVisual`** - Grid visualization, cell highlighting on hover
+- **`BoardGridVisualSingle`** - Single visualization cell
 
 ### Merge System
 
-- **`MergeController`** - Оркестратор слияний. Запуск каскадов, контроль последовательности, проверка уничтожения (10+ плиток)
-- **`MergeAnalyzer`** - Анализ и поиск операций. Применяет все правила, сортирует по score, находит affected позиции
-- **`MergeExecutor`** - Выполнение операций. Перемещение плиток, удаление пустых стеков, уничтожение
-- **`MergeOperation`** - Структура операции (From, To, Count, Score)
+- **`MergeController`** - Merge orchestrator. Launching cascades, sequence control, destruction check (10+ tiles)
+- **`MergeAnalyzer`** - Analysis and operation search. Applies all rules, sorts by score, finds affected positions
+- **`MergeExecutor`** - Operation execution. Tile movement, empty stack removal, destruction
+- **`MergeOperation`** - Operation structure (From, To, Count, Score)
 
 #### Rules
 
-- **`IMergeRule`** - Интерфейс правила слияния
-- **`ConsolidationRule`** - Собирает от 2+ соседей одного цвета (приоритет 500+)
-- **`InboundRule`** - Притягивает плитки К размещенному стеку (приоритет 50-200)
-- **`OutboundRule`** - Отправляет плитки ИЗ размещенного стека (приоритет 10-100)
+- **`IMergeRule`** - Merge rule interface
+- **`ConsolidationRule`** - Collects from 2+ neighbors of the same color (priority 500+)
+- **`InboundRule`** - Pulls tiles TO the placed stack (priority 50-200)
+- **`OutboundRule`** - Sends tiles FROM the placed stack (priority 10-100)
 
 ### Tiles System
 
-- **`TileStack`** - Модель стека. LIFO операции, подсчет блоков цвета, проверка монохромности
-- **`ColoredTile`** - Модель плитки с цветом
-- **`ColoredTileFactory`** - Создание плиток (random или по цвету)
-- **`DraggableStack`** - Drag & Drop контроллер. Input, валидация, триггер слияния
-- **`HandProvider`** - Генерация 3 случайных стеков. Обновление после размещения всех
-- **`TileVisual`** - Визуальное представление плитки
-- **`TileStackVisual`** - Базовая визуализация стека
-- **`TileStackAnimatedVisual`** - Анимированная визуализация
-- **`TilesVisualSpawner`** - Создание визуальных элементов для плиток
+- **`TileStack`** - Stack model. LIFO operations, color block counting, monochrome check
+- **`ColoredTile`** - Tile model with color
+- **`ColoredTileFactory`** - Tile creation (random or by color)
+- **`DraggableStack`** - Drag & Drop controller. Input, validation, merge trigger
+- **`HandProvider`** - Generation of 3 random stacks. Updates after all are placed
+- **`TileVisual`** - Visual representation of a tile
+- **`TileStackVisual`** - Base stack visualization
+- **`TileStackAnimatedVisual`** - Animated visualization
+- **`TilesVisualSpawner`** - Creation of visual elements for tiles
 
 ### Utilities
 
-- **`PointerToWorld`** - Конвертация screen → world координат
-- **`GameSignals`** - Система событий/сигналов - не реализованно
+- **`PointerToWorld`** - Screen → world coordinate conversion
+- **`GameSignals`** - Event/signal system - not implemented
 
-## Известные проблемы
+## Possible Improvements
 
-1. **Input в компоненте визуализации** (`DraggableStack.cs`)**
-   - Нужен отдельный InputManager (не хватило времни) - вообще делает достаточно дофига
-
-2. **Debug код всегда активен** (`BoardGrid.cs:36`)
-   - GridDebug создается в продакшене
-
-3. **Есть баг в логике смешивания**
-   - иногда стоящие рядом тайлы не совмещаются
-   - иногда почему то при смешивании появляется пустой тайл в стэке что мешает убить стэк, если го опять с чем то смешать то тайл проподает.
-
-4. **Нет анимации смешивания стеков и полиша вцэлом**
-   - текущая визуализация стека просто добавляет тайлы с задержкой
-   - нет вообще нигде анимаций фактически. Не исользуется дотвин вообще
-
-5. **Нет Object Pooling**
-   - Частое создание/удаление стеков и тайлов
-
-6. **Нет уровней, только один геймплей сцена**
-   - не успел реализовать
-
-7. **Поля для игры не строится а фиксированно**
-   - не успел реализовать, сейчас стэки можно ставить по всей борде - хотелось строить борду с разлоичной формой
-
-8. **Нет бустеров**
-   - не успел реализовать бустеры, однако при текущей архетектуре бустеры который уничтожают стэк или позволяют переместить стэк - легко реализвать grid.RemoveStackAtPosition и включением DraggableStack на выставленных стэках
-
-9. **Нет UI**
-   - не успел реализовать - все что нужно, добавить в нужные точки ивенты или синганалы, и обновлять UI очков после уничтожения стэка (ивнет о уничтожении стэка есть, нужно туда передавать информацию о самом стэке - извне ивент анализируем, и добавляем в счет игрока, UI отражает эти изменения, пока не решил как бы я реализовывал бы UI, может просто компоненты котоыре тупа слушают тот же ивент - меньше кода, для данного проекта самый простой и очевидный вариант)
-
-10. **Не тестил билд((((**
-    - Билд собрал как только закончил писать код, нет андройда и времени не хватило, смотрел в симулятое, свитч платформы был без ошибок и тач вроде работает корректно
-
-## Возможные улучшения
-
-- Object Pooling для стеков и визуалов
-- Можно DI вместо Singleton (но я считаю что это оверкил, хотя замена произойдет просто так как напрямую синглтоны нигде не используются, мы через них получаем ссылки на нужный класс в старте, легко заменить на Initialize)
-- ScriptableObjects для конфигурации (scores, пороги) или JSON
-- Combo система с бонусами
-- Добавить вращение поля при помощи вращающейся камеры (Cinemachine)
-- Добавить полноценный бутстрап мейн меню и выбор уровня (ну или систему последовательной выдачи уровней)
+- Object Pooling for stacks and visuals
+- Could use DI instead of Singleton (but I think it's overkill, though replacement would be simple since singletons aren't used directly anywhere, we get references to the needed class in Start, easy to replace with Initialize)
+- ScriptableObjects for configuration (scores, thresholds) or JSON
+- Combo system with bonuses
+- Add field rotation using rotating camera (Cinemachine)
+- Add proper bootstrap main menu and level selection (or a sequential level delivery system)
 
 
-## Геймплей
+## Gameplay
 
-1. Получаешь 3 случайных стека
-2. Размещаешь на гексагональной сетке
-3. Автоматические каскадные слияния
-4. 10+ плиток одного цвета → уничтожение
-5. После 3 размещений → новые стеки
+1. Get 3 random stacks
+2. Place them on the hexagonal grid
+3. Automatic cascading merges
+4. 10+ tiles of the same color → destruction
+5. After 3 placements → new stacks
 
 ---
 
-**Unity:** 2022.3.62f  
+**Unity:** 2022.3.62f
+
